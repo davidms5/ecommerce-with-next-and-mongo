@@ -1,3 +1,5 @@
+//esto es solamente un archivo de para insertar datos de prueba en la base de datos
+
 import Producto from '../modules/productosModel.js';
 import dotenv from 'dotenv';
 import conexionDataBase from '../config/database.js';
