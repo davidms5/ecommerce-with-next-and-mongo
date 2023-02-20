@@ -8,7 +8,7 @@ const productosEsquema = new mongoose.Schema({
     maxLength: 100,
   },
   precio: {
-    type: Number.
+    type: Number,
     required: [true, "por favor ingrese precio del producto"],
     maxLength: 5,
     default: 0.0
@@ -35,7 +35,7 @@ const productosEsquema = new mongoose.Schema({
   ],
   categoria: {
     type: String,
-    required: [true, 'por favor inserte una categoria']
+    required: [true, 'por favor inserte una categoria'],
     enum: {
         values: [
           'electronicos',
@@ -77,11 +77,19 @@ const productosEsquema = new mongoose.Schema({
       rating: {
         type: Number,
         required: true
+      },
+      comentarios:{
+        type: String,
+        required: true
       }
     }
-  ]
+  ],
+  createdAt:{
+    type: Date,
+    default: Date.now
+  }
 })
 
 const baseProductos = mongoose.model('productos', productosEsquema);
 
-export {baseProductos};
+export default baseProductos;
