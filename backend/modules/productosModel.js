@@ -38,9 +38,9 @@ const productosEsquema = new mongoose.Schema({
     required: [true, 'por favor inserte una categoria'],
     enum: {
         values: [
-          'electronicos',
+          'Electronicos',
           'camaras',
-          'laptop',
+          'laptops',
           'accesorios',
           'audifonos',
           'comida',

@@ -12,4 +12,4 @@ const conexionDataBase = () =>{
   })
 }
 
-export {conexionDataBase}
+export default conexionDataBase

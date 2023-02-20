@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server.js",
+    "seeder":"node backend/utils/seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
