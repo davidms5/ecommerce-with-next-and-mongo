@@ -1,6 +1,6 @@
-import Productos from '../modules/productosModel'
+import Productos from '../modules/productosModel.js'
 
-const newProducto = async (req, res, next) =>{
+export const newProducto = async (req, res, next) =>{
 
   const producto = await Productos.create(req.body);
 
@@ -10,11 +10,15 @@ const newProducto = async (req, res, next) =>{
   })
 }
 
-const getProductos = (req, res, next) =>{
+export const getProductos = async(req, res, next) =>{
+
+  const allProducts = await Productos.find();
+
   res.status(200).json({
     success: true,
-    message: 'esta ruta muestra todos los productos'
+    count: allProducts.length,
+    allProducts
   })
 }
 
-module.exports = {getProductos, newProducto};
+//module.exports = {getProductos, newProducto};
