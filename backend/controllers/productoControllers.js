@@ -1,4 +1,6 @@
-import Productos from '../modules/productosModel.js'
+import Productos from '../modules/productosModel.js';
+import manejoErrores from '../utils/errorHandler.js';
+
 
 export const newProducto = async (req, res, next) =>{
 
@@ -26,10 +28,8 @@ export const getSingleProducto = async(req, res, next) =>{
   const producto = await Productos.findById(req.params.id);
 
   if(!producto){
-    return res.status(404).json({
-      success: false,
-      message: 'producto no encontrado'
-    })
+    //analizar la linea de abajo
+    return next(new manejoErrores('producto no encontrado', 404))
   }
 
   res.status(200).json({
