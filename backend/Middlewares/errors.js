@@ -1,6 +1,6 @@
 import ErrorHandler from '../utils/errorHandler.js';
 
-export let manejoErrores = (err, req, res, next) =>{
+export const manejoErrores = (err, req, res, next) =>{
 
   err.statusCode = statusCode || 500;
 

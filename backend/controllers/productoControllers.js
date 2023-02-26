@@ -1,9 +1,9 @@
 import Productos from '../modules/productosModel.js';
-import manejoErrores from '../utils/errorHandler.js';
-import catchAsyncErrors from '../Middlewares/catchAsyncErrors.js';
+import ErrorHandler from '../utils/errorHandler.js';
+
 //lo de arriba esta bueno, ya que maneja los casos de error en donde falten datos a la hora de crear un nuevo producto
 
-export const newProducto = catchAsyncErrors(async (req, res, next) =>{
+export const newProducto = async (req, res, next) =>{
 
   const producto = await Productos.create(req.body);
 
@@ -11,9 +11,9 @@ export const newProducto = catchAsyncErrors(async (req, res, next) =>{
     success: true,
     producto
   })
-})
+}
 
-export const getProductos = catchAsyncErrors(async(req, res, next) =>{
+export const getProductos = async(req, res, next) =>{
 
   const allProducts = await Productos.find();
 
@@ -22,32 +22,32 @@ export const getProductos = catchAsyncErrors(async(req, res, next) =>{
     count: allProducts.length,
     allProducts
   })
-})
+}
 
 //get single product: el params.id == api/productos/1 por ejemplo
-export const getSingleProducto = catchAsyncErrors(async(req, res, next) =>{
+export const getSingleProducto = async(req, res, next) =>{
   const producto = await Productos.findById(req.params.id);
 
   if(!producto){
     //analizar la linea de abajo
-    return next(new manejoErrores('producto no encontrado', 404))
+    return next(new ErrorHandler('producto no encontrado', 404))
   }
 
   res.status(200).json({
     success: true,
     producto
   })
-})
+}
 //module.exports = {getProductos, newProducto};
 
 //update producto
 //
-export const updateProducto = catchAsyncErrors(async(req, res, next) =>{
+export const updateProducto =async(req, res, next) =>{
 
   let producto = await Productos.findById(req.params.id);
 
   if(!producto){
-    return next(new manejoErrores('producto no encontrado', 404))
+    return next(new ErrorHandler('producto no encontrado', 404))
   }
 
   producto = await Productos.findByIdAndUpdate(req.params.id, req.body, {
@@ -61,14 +61,14 @@ export const updateProducto = catchAsyncErrors(async(req, res, next) =>{
     producto
   })
 
-})
+}
 
-export const deleteProducto = catchAsyncErrors(async(req, res, next) =>{
+export const deleteProducto = async(req, res, next) =>{
 
   let producto = await Productos.findById(req.params.id);
 
   if(!producto){
-    return next(new manejoErrores('producto no encontrado', 404))
+    return next(new ErrorHandler('producto no encontrado', 404))
   }
   
   await producto.remove();
@@ -78,4 +78,4 @@ export const deleteProducto = catchAsyncErrors(async(req, res, next) =>{
     message: 'producto borrado'
   });
 
-})
+}

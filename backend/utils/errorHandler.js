@@ -1,6 +1,6 @@
 //error handler class
 //
-export class ErrorHandler extends Error {
+export default class ErrorHandler extends Error {
   constructor(mensaje, statusCode){
     super(mensaje);
     

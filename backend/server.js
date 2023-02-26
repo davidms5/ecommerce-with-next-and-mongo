@@ -7,7 +7,16 @@ dotenv.config({path: 'backend/config/config.env'})
 const puerto = process.env.PORT
 conexionDataBase();
 
-app.listen(puerto, () =>{
+const server = app.listen(puerto, () =>{
   console.log(`server iniciado en el puerto ${puerto} en modo ${process.env.NODE_ENV}`);
 })
 
+//handle unhandled promises rejections, analizando lo que pone abajo se entiende que hace
+
+process.on("unhandledRejection", err =>{
+  console.log(`error ${err.message}`);
+  console.log("cerrando el server debido a 'unhandled promise rejection' ");
+  server.close(() =>{
+    process.exit(1)
+  })
+})

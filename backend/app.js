@@ -3,7 +3,7 @@ import express from 'express';
 import productos from './routes/productos.js';
 
 //middleWares
-import manejoErrores from './Middlewares/errors.js';
+import {manejoErrores} from './Middlewares/errors.js';
 
 
 const app = express();
