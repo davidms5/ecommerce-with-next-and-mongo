@@ -1,10 +1,11 @@
 import Productos from '../modules/productosModel.js';
 import ErrorHandler from '../utils/errorHandler.js';
-
+import apiFeatures from '../utils/apiFeatures.js'
 //lo de arriba esta bueno, ya que maneja los casos de error en donde falten datos a la hora de crear un nuevo producto
 
 export const newProducto = async (req, res, next) =>{
 
+  
   const producto = await Productos.create(req.body);
 
   res.status(201).json({
@@ -15,7 +16,9 @@ export const newProducto = async (req, res, next) =>{
 
 export const getProductos = async(req, res, next) =>{
 
-  const allProducts = await Productos.find();
+  //como arreglar lo de abajo en https://stackoverflow.com/questions/35152310/mongoose-text-search-with-partial-string
+  const APIFeatures = new apiFeatures(Productos.find(), req.query).search()
+  const allProducts = await APIFeatures.query;
 
   res.status(200).json({
     success: true,
